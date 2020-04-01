@@ -18,6 +18,10 @@ https://leetcode-cn.com/problems/liang-ge-lian-biao-de-di-yi-ge-gong-gong-jie-di
 
 这样，当它们相遇时，所指向的结点就是第一个公共结点。
 
+#### 动画图解：
+
+![leetcode_160](%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9852%EF%BC%9A%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%AC%E5%85%B1%E8%8A%82%E7%82%B9.assets/leetcode_160.gif)
+
 代码演示：
 
 ```go
