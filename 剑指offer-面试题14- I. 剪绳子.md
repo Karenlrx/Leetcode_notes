@@ -1,3 +1,9 @@
+#### github无法显示latex公式解决办法：
+
+Open the URL in Browser：[https://karenlrx.github.io/Leetcode_notes/%E5%89%91%E6%8C%87offer-%E9%9D%A2%E8%AF%95%E9%A2%9814-%20I.%20%E5%89%AA%E7%BB%B3%E5%AD%90.html](https://karenlrx.github.io/Leetcode_notes/剑指offer-面试题14- I. 剪绳子.html)
+
+
+
 #### 原题链接：
 
 https://leetcode-cn.com/problems/jian-sheng-zi-lcof/
