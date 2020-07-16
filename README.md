@@ -1,2 +1,2 @@
 # Leetcode_notes
-My LeetCode notes
+My LeetCode notes.

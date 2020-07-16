@@ -67,6 +67,8 @@ func findRepeatNumber(nums []int) int {
 
 **代码演示：**
 
+Golang:
+
 ```go
 func findRepeatNumber(nums []int) int {
     for i := 0; i < len(nums); i++ {
@@ -87,3 +89,34 @@ func findRepeatNumber(nums []int) int {
 >
 > 内存消耗 :6.9 MB, 在所有 Go 提交中击败了100.00%的用户
 
+
+
+Java:
+
+```java
+class Solution {
+    public void swap(int i, int j , int[] nums){
+
+        int temp;
+        temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+
+    public int findRepeatNumber(int[] nums) {
+
+        for (int i=0; i<nums.length; i++){
+            if(i!=nums[i] && nums[i]==nums[nums[i]]){
+                return nums[i];
+            }
+            swap(nums[i], nums[nums[i]], nums);
+
+        }
+        return -1;
+    }
+}
+```
+
+> 执行用时：2 ms, 在所有 Java 提交中击败了70.56% 的用户
+>
+> 内存消耗：47.7 MB, 在所有 Java 提交中击败了100.00% 的用户
