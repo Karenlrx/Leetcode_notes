@@ -1,0 +1,139 @@
+#### [117. 填充每个节点的下一个右侧节点指针 II](https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node-ii/)
+
+给定一个二叉树
+
+```
+struct Node {
+  int val;
+  Node *left;
+  Node *right;
+  Node *next;
+}
+```
+
+
+填充它的每个 next 指针，让这个指针指向其下一个右侧节点。如果找不到下一个右侧节点，则将 next 指针设置为 NULL。
+
+初始状态下，所有 next 指针都被设置为 NULL。
+
+**进阶：**
+
+- 你只能使用常量级额外空间。
+- 使用递归解题也符合要求，本题中递归程序占用的栈空间不算做额外的空间复杂度。
+
+
+示例：
+
+![img](image/117_sample.png)
+
+```
+输入：root = [1,2,3,4,5,null,7]
+输出：[1,#,2,3,#,4,5,7,#]
+解释：给定二叉树如图 A 所示，你的函数应该填充它的每个 next 指针，以指向其下一个右侧节点，如图 B 所示。
+
+提示：
+
+树中的节点数小于 6000
+-100 <= node.val <= 100
+```
+
+1. 不用额外空间（利用双指针）
+
+解题思路：
+
+如果第 i 层节点之间已经建立next 指针，就可以通过next 指针访问该层的所有节点，同时对于每个第 i 层的节点，我们又可以通过它的 left 和right 指针知道其第 i+1 层的孩子节点是什么，所以遍历过程中就能够按顺序为第i+1 层节点建立 next 指针。
+
+```java
+public class Solution {
+    public Node connect(Node root) {
+        Node cur = root;
+        while (cur != null) {
+            //新建一个头节点，作为每一层链表的头节点
+            Node dummy = new Node(0);
+            //tmp作为每一层链表的指针
+            Node tmp = dummy;
+            //遍历当前层所有节点
+            while (cur != null) {
+                //当前层的顺序应为 dummy -> cur.left -> cur.right
+                if (cur.left != null) {
+                    tmp.next = cur.left;
+                    tmp = tmp.next;
+                }
+                if (cur.right != null) {
+                    tmp.next = cur.right;
+                    tmp = tmp.next;
+                }
+                //层次遍历访问下一个节点
+                cur = cur.next;
+            }
+            //指向头节点,为下一层层次遍历的第一个节点
+            cur = dummy.next;
+        }
+        return root;
+    }
+}
+```
+
+2. 层次遍历
+
+利用层次遍历，可以在遍历每一层的时候修改这一层节点的 next 指针，这样就可以把每一层都组织成链表。
+
+层次遍历模板：
+
+```java
+public void levelOrder(TreeNode tree) {
+    if (tree == null)
+        return;
+    Queue<TreeNode> queue = new LinkedList<>();
+    queue.add(tree);//相当于把数据加入到队列尾部
+    while (!queue.isEmpty()) {
+        //poll方法相当于移除队列头部的元素
+        TreeNode node = queue.poll();
+        System.out.println(node.val);
+        if (node.left != null)
+            queue.add(node.left);
+        if (node.right != null)
+            queue.add(node.right);
+    }
+}
+```
+
+> - 时间复杂度：O(N)。我们需要遍历这棵树上所有的点，时间复杂度为 O(N)。
+> - 空间复杂度：O(1)。
+
+题解：
+
+```java
+public Node connect(Node root) {
+    if (root == null)
+        return root;
+    Queue<Node> queue = new LinkedList<>();
+    queue.add(root);
+    while (!queue.isEmpty()) {
+        //每一层的数量
+        int levelCount = queue.size();
+        //初始化pre为每一层的头节点
+        Node pre = null;
+        for (int i = 0; i < levelCount; i++) {
+            //出队
+            Node node = queue.poll();
+            //如果pre为空就表示node节点是这一行的第一个，
+            //没有前一个节点指向它，否则就让前一个节点指向它
+            if (pre != null) {
+                pre.next = node;
+            }
+            //pre更新为当前节点
+            pre = node;
+            //左右子节点如果不为空就入队
+            if (node.left != null)
+                queue.add(node.left);
+            if (node.right != null)
+                queue.add(node.right);
+        }
+    }
+    return root;
+}
+```
+
+> - 时间复杂度：O(N)。我们需要遍历这棵树上所有的点，时间复杂度为 O(N)。
+> - 空间复杂度：O(N)。即队列的空间代价。
