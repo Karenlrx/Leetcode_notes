@@ -6,7 +6,7 @@
 
 例如，给定如下二叉搜索树:  root = [6,2,8,0,4,7,9,null,null,3,5]
 
-![img](C:\Users\Karen\Documents\笔记\leetcode\Leetcode_notes\image\binarysearchtree_improved.png)
+![binarytree](image/binarytree.png)
 
 ```
 示例 1:
