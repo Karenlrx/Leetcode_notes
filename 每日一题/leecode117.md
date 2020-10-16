@@ -37,7 +37,7 @@ struct Node {
 -100 <= node.val <= 100
 ```
 
-1. 不用额外空间（利用双指针）
+1. **不用额外空间（利用双指针）**
 
 解题思路：
 
@@ -51,17 +51,17 @@ public class Solution {
             //新建一个头节点，作为每一层链表的头节点
             Node dummy = new Node(0);
             //tmp作为每一层链表的指针
-            Node tmp = dummy;
+            Node pre = dummy;
             //遍历当前层所有节点
             while (cur != null) {
                 //当前层的顺序应为 dummy -> cur.left -> cur.right
                 if (cur.left != null) {
-                    tmp.next = cur.left;
-                    tmp = tmp.next;
+                    pre.next = cur.left;
+                    pre = pre.next;
                 }
                 if (cur.right != null) {
-                    tmp.next = cur.right;
-                    tmp = tmp.next;
+                    pre.next = cur.right;
+                    pre = pre.next;
                 }
                 //层次遍历访问下一个节点
                 cur = cur.next;
@@ -74,7 +74,10 @@ public class Solution {
 }
 ```
 
-2. 层次遍历
+> - 时间复杂度：O(N)。我们需要遍历这棵树上所有的点，时间复杂度为 O(N)。
+> - 空间复杂度：O(1)。
+
+2. **层次遍历**
 
 利用层次遍历，可以在遍历每一层的时候修改这一层节点的 next 指针，这样就可以把每一层都组织成链表。
 
@@ -98,8 +101,7 @@ public void levelOrder(TreeNode tree) {
 }
 ```
 
-> - 时间复杂度：O(N)。我们需要遍历这棵树上所有的点，时间复杂度为 O(N)。
-> - 空间复杂度：O(1)。
+> - 
 
 题解：
 
