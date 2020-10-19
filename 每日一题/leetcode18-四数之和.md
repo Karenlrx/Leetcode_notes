@@ -24,9 +24,9 @@
 
 四数之和，和「[15. 三数之和](https://leetcode-cn.com/problems/3sum/)」是一个思路，都是使用双指针法, 基本解法就是在三数之和 的基础上再套一层for循环。
 
-三数之和的双指针解法是一层for循环num[i]为确定值，然后循环内有left和right下表作为双指针，找到nums[i] + nums[left] + nums[right] == 0。
+三数之和的双指针解法是一层for循环`num[i]`为确定值，然后循环内有left和right下表作为双指针，找到`nums[i] + nums[left] + nums[right] == 0`。
 
-四数之和的双指针解法是两层for循环nums[k] + nums[i]为确定值，依然是循环内有left和right下表作为双指针，找出nums[k] + nums[i] + nums[left] + nums[right] == target的情况，三数之和的时间复杂度是O(n^2^)，四数之和的时间复杂度是O(n^3^) 。
+四数之和的双指针解法是两层for循环`nums[k] + nums[i]`为确定值，依然是循环内有left和right下表作为双指针，找出`nums[k] + nums[i] + nums[left] + nums[right] == target`的情况，三数之和的时间复杂度是O(n^2^)，四数之和的时间复杂度是O(n^3^) 。
 
 那么一样的道理，五数之和、六数之和等等都采用这种解法。
 

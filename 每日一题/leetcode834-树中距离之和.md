@@ -2,7 +2,7 @@
 
 给定一个无向、连通的树。树中有 N 个标记为 0...N-1 的节点以及 N-1 条边 。
 
-第 i 条边连接节点 edges[i][0] 和 edges[i][1] 。
+第 i 条边连接节点 `edges[i][0] `和 `edges[i][1] `。
 
 返回一个表示节点 i 与其他所有节点距离之和的列表 ans。
 
@@ -32,9 +32,9 @@
 
 - 子树内的节点与 root 的距离和
 - 子树外的节点与 root 的距离和
-  用递归求解前者，这是主旋律，后者不用特地求，因为我们已知父节点的正确的 distSum，利用递推公式：
+  用递归求解前者，这是主旋律，后者不用特地求，因为我们已知父节点的正确的 `distSum`，利用递推公式：
 
-distSum[i] =(distSum[root]  + (N - nodeNum[i]) - nodeNum[i]
+`distSum[i] =(distSum[root]  + (N - nodeNum[i]) - nodeNum[i]`
 
 就能递推出当前节点的正确的 distSum，就像沿着一棵树在填表，这就是树形DP。
 
