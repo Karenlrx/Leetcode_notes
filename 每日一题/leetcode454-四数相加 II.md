@@ -74,7 +74,7 @@ class Solution {
 
 **代码演示（Golang）**
 
-```
+```Go
 func fourSumCount(A []int, B []int, C []int, D []int) int {
 	sumAB := make(map[int]int)
 	res := 0
