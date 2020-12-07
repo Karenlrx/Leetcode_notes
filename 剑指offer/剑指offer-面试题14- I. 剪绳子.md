@@ -40,7 +40,8 @@ https://leetcode-cn.com/problems/jian-sheng-zi-lcof/
   n = n_1 + n_2 + ... + n_a
   $$
 
-```latex
+```
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 $$
 n = n_1 + n_2 + ... + n_a
 $$
