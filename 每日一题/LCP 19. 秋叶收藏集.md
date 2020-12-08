@@ -22,7 +22,7 @@
 
 提示：
 
-3 <= leaves.length <= 10^5
+3 <= leaves.length <= 10<sup>5</sup>
 leaves 中只包含字符 'r' 和字符 'y'
 ```
 

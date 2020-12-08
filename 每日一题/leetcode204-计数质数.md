@@ -67,7 +67,7 @@
 
 ![Sieve_of_Eratosthenes_animation.gif](https://pic.leetcode-cn.com/1606932458-HgVOnW-Sieve_of_Eratosthenes_animation.gif)
 
-注意每次找当前素数 x 的倍数时，是从x^2^开始的。因为如果x>2，那么 2∗x 肯定被素数 2 给过滤了，最小未被过滤的肯定是 x^2^。
+注意每次找当前素数 x 的倍数时，是从x<sup>2</sup>开始的。因为如果x>2，那么 2∗x 肯定被素数 2 给过滤了，最小未被过滤的肯定是 x<sup>2</sup>。
 
 ```java
 class Solution {  

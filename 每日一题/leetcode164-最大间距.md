@@ -209,7 +209,7 @@ class Solution {
 
 > - 最佳情况：T(n) = O(n+k)
 > - 最差情况：T(n) = O(n+k)
-> - 平均情况：T(n) = O(n^2^)
+> - 平均情况：T(n) = O(n<sup>2</sup>)
 > - 空间复杂度：O(n+k)　　
 
 
