@@ -100,10 +100,10 @@ func myPow(x float64, n int) float64 {
 - n >> 1 —右移1位, 去掉 n 的二进制数最低位 , 相当于 n / 2
 
 - 当 n 为偶数时
-  - x ^ n = x ^( n / 2 ) * x ^( n / 2 )
+  - x <sup> n </sup> = x <sup>( n / 2 )</sup> * x <sup>( n / 2 )</sup>
   - n >> 1 , n右移 1 位后，x 自己乘自己，因为二进制每位的差距是平方关系
 - 当 n 为奇数时
-  - 需要再乘以多出来的一次，即 x ^ n = x * x ^( n - 1 )
+  - 需要再乘以多出来的一次，即 x <sup> n</sup> = x * x <sup>( n - 1 )</sup>
   - n - 1 , x 不更新，将 x 累乘到 ret
 
 
