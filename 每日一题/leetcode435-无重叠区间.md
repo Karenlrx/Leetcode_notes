@@ -1,0 +1,92 @@
+#### [435. 无重叠区间](https://leetcode-cn.com/problems/non-overlapping-intervals/)
+
+给定一个区间的集合，找到需要移除区间的最小数量，使剩余区间互不重叠。
+
+注意:
+
+可以认为区间的终点总是大于它的起点。
+区间 [1,2] 和 [2,3] 的边界相互“接触”，但没有相互重叠。
+
+```
+示例 1:
+输入: [ [1,2], [2,3], [3,4], [1,3] ]
+
+输出: 1
+解释: 移除 [1,3] 后，剩下的区间没有重叠。
+
+示例 2:
+输入: [ [1,2], [1,2], [1,2] ]
+
+输出: 2
+解释: 你需要移除两个 [1,2] 来使剩下的区间没有重叠。
+
+示例 3:
+输入: [ [1,2], [2,3] ]
+
+输出: 0
+解释: 你不需要移除任何区间，因为它们已经是无重叠的了。
+```
+
+#### 解题思路（贪心）
+
+首先要对区间进行排序，这里先以区间的头来排序，然后再遍历区间。
+
+1. 用end记录当前的尾部，
+   - 如果`intervals[i][0] < end`，说明后面区间的头小于当前区间的尾，则这两个区间有重复，必须要移除一个。
+   - 为了防止在下一个区间和现有区间有重叠，我们应该让现有区间越短越好，所以应该移除尾部比较大的，保留尾部比较小的。
+2. 如果后面区间的头不小于当前区间的尾，说明他们没有重合，不需要移除。
+
+
+
+如下图区间[1,2]和[1,3]有了重叠，我们要移除尾部比较大的，也就是红色的[1,3]区间
+
+![image.png](image/1609380969-rHsmVx-image.png)
+
+
+
+**代码演示（Golang）**
+
+```go
+import "sort"
+
+func eraseOverlapIntervals(intervals [][]int) int {
+	n := len(intervals)
+	if n == 0 {
+		return 0
+	}
+	//先排序,对sort.Slice()需要重写less方法，可简写为：
+	//sort.Slice(intervals, func(i, j int) bool { return intervals[i][0] < intervals[j][0] })
+
+	less := func(i, j int) bool {
+		return intervals[i][0] < intervals[j][0]
+	}
+
+	sort.Slice(intervals, less)
+	//记录区间尾部位置
+	count, end := 0, intervals[0][1]
+	for i := 1; i < len(intervals); i++ {
+		//如果重叠了，必须要移除一个，所以count要加1，
+		//然后更新尾部的位置，我们取尾部比较小的
+		if intervals[i][0] < end {
+			count++
+			end = min(end,intervals[i][1])
+		}else {
+			//如果没有重叠，就不需要移除，只需要更新尾部的位置即可
+			end = intervals[i][1]
+		}
+	}
+	return count
+}
+
+func min(i, j int) int {
+	if i < j {
+		return i
+	}
+	return j
+}
+```
+
+> 时间复杂度：O(n log n)，其中 n 是区间的数量。我们需要 O(n log n) 的时间对所有的区间按照左端点进行升序排序，并且需要 O(n) 的时间进行遍历。由于前者在渐进意义下大于后者，因此总时间复杂度为 O(n log n)。
+>
+> 空间复杂度：O(log n)，即为排序需要使用的栈空间。
+>
