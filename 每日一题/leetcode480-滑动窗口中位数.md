@@ -244,5 +244,5 @@ func medianSlidingWindow(nums []int, k int) []float64 {
 >
 > 时间复杂度：O(n log n)。`insert(num)` 和 `erase(num)` 单次时间复杂度为 O(log n)，`getMedian()` 单次时间复杂度为 O(1)。因此总时间复杂度为 O(n log n)。
 >
-> 空间复杂度：O(n)。即为 `small`，`large` 和 `delayed` 需要使用的空间。
+> 空间复杂度：O(n)。即为 `small`，`large` 和 `delayed` 需要使用的空间。 
 >
