@@ -1,0 +1,129 @@
+#### [530. 二叉搜索树的最小绝对差](https://leetcode-cn.com/problems/minimum-absolute-difference-in-bst/)
+
+给你一棵所有节点为非负值的二叉搜索树，请你计算树中任意两节点的差的绝对值的最小值。
+
+ 
+
+```
+示例：
+
+输入：
+
+   1
+    \
+     3
+    /
+   2
+
+输出：
+1
+
+解释：
+最小绝对差为 1，其中 2 和 1 的差的绝对值为 1（或者 2 和 3）。
+
+
+提示：
+
+树中至少有 2 个节点。
+```
+
+
+
+**解题思路：**
+
+**二叉搜索树中序遍历为递增序列**，所以我们只需要在中序遍历的时候和前一个节点比较，保存最小的差值即可。
+
+
+
+复习二叉树中序遍历递归与非递归算法：
+
+```java
+//递归
+public void inOrderTraversal(TreeNode node) {
+    if (node == null)
+        return;
+    inOrderTraversal(node.left);
+    System.out.println(node.val);
+    inOrderTraversal(node.right);
+}
+
+
+//非递归
+public static void inOrderTraversal(TreeNode tree) {
+    Stack<TreeNode> stack = new Stack<>();
+    while (tree != null || !stack.isEmpty()) {
+        while (tree != null) {
+            stack.push(tree);
+            tree = tree.left;
+        }
+        if (!stack.isEmpty()) {
+            tree = stack.pop();
+            System.out.println(tree.val);
+            tree = tree.right;
+        }
+    }
+}
+
+```
+
+
+
+**代码演示：**
+
+```java
+public class Solution {
+	//差值的最小值
+    int min = Integer.MAX_VALUE;
+    //前一个节点
+    TreeNode prev;
+
+    public int getMinimumDifference(TreeNode root) {
+        inorder(root);
+        return min;
+    }
+
+    public void inorder(TreeNode root) {
+        //边界条件判断
+        if (root == null)
+            return;
+        //左子树
+        inorder(root.left);
+        //对当前节点的操作
+        if (prev != null)
+            min = Math.min(min, root.val - prev.val);
+        prev = root;
+        //右子树
+        inorder(root.right);
+    }
+}
+
+//非递归
+public class Solution {
+    public int getMinimumDifference(TreeNode root) {
+        LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
+        TreeNode pre = null;
+        int min = Integer.MAX_VALUE;
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            if (!stack.isEmpty()) {
+                root = stack.pop();
+                if (pre != null) {
+                    min = Math.min(min, root.val - pre.val);
+                }
+                pre = root;
+                root = root.right;
+            }
+        }
+        return min;
+    }
+}
+
+```
+
+> 时间复杂度：O(n)，其中 n 为二叉搜索树节点的个数。每个节点在中序遍历中都会被访问一次且只会被访问一次，因此总时间复杂度为 O(n)。
+>
+> 空间复杂度：O(n)。递归函数的空间复杂度取决于递归的栈深度，而栈深度在二叉搜索树为一条链的情况下会达到 O(n) 级别。
+>
