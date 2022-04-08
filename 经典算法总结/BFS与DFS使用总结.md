@@ -162,7 +162,7 @@ func levelOrder(root *TreeNode) [][]int {
         res = append(res,[]int{})
 		n := len(queue)
 		for j := 0; j < n; j++ {
-            //node=队列的队尾元素
+            //node=队列的队头元素
 			node := queue[0]
             //出队（最先入队的元素）
             queue = queue[1:]
