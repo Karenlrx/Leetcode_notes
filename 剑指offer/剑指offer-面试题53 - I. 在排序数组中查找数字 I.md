@@ -21,13 +21,57 @@ https://leetcode-cn.com/problems/zai-pai-xu-shu-zu-zhong-cha-zhao-shu-zi-lcof/
 
 #### 解题思路：
 
-利用折半查找到target，然后找到target的左右边界，则target数量为right - left -1，如图：
+利用折半查找到target，然后找到target的左右边界，则target数量为rightIndex - leftIndex + 1，如图：
 
-![Picture1.png](image/b4521d9ba346cad9e382017d1abd1db2304b4521d4f2d839c32d0ecff17a9c0d-Picture1.png)
+![image-20220525172600095](images/image-20220525172600095.png)
 
-
+![image-20220525172636103](images/image-20220525172636103.png)
 
 **代码演示：**
+
+```go
+func search(nums []int, target int) int {
+	leftIndex := findIndex(nums, target, true)
+	rightIndex := findIndex(nums, target, false)
+	if leftIndex < 0 {
+		return 0
+	}
+	return rightIndex - leftIndex + 1
+}
+
+// 找左右index
+func findIndex(nums []int, target int, isLeft bool) int {
+	var (
+		index = -1
+		mid   = 0
+		n     = len(nums)
+		low   = 0
+		high  = n - 1
+	)
+	for low <= high {
+		mid = (low + high) / 2
+		if target < nums[mid] {
+			high = mid - 1
+		} else if target > nums[mid] {
+			low = mid + 1
+		}
+		if target == nums[mid] {
+			if isLeft {
+				high = mid - 1
+			} else {
+				low = mid + 1
+			}
+			index = mid
+		}
+	}
+	return index
+}
+
+```
+
+> 执行用时：4 ms, 在所有 Go 提交中击败了95.73%的用户
+>
+> 内存消耗：3.8 MB, 在所有 Go 提交中击败了100.00%的用户
 
 ```go
 func search(nums []int, target int) int {

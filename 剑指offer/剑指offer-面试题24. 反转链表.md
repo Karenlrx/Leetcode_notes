@@ -51,6 +51,18 @@ func reverseList(head *ListNode) *ListNode {
     }
     return cur
 }
+
+func reverseList(head *ListNode) *ListNode {
+    var pre *ListNode
+    cur := head
+    for cur != nil {
+        next := cur.Next
+        cur.Next = pre
+        pre = cur
+        cur = next
+    }
+    return pre
+}
 ```
 
 > 执行用时 :0 ms, 在所有 Go 提交中击败了100.00%的用户
