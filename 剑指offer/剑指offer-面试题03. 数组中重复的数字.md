@@ -31,17 +31,17 @@ https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/
 
 ```go
 func findRepeatNumber(nums []int) int {
-    if len(nums ) == 0 {
-        return -1
-    }
-    map_num := make( map[int]bool )
-     for _, v := range nums {
-         if map_num[v] {
-             return v
-         }
-         map_num[v] = true 
-     }
-     return -1
+	hashMap := make(map[int]struct{}, 0)
+	var res int
+	for _, num := range nums {
+		if _, ok := hashMap[num]; !ok {
+			hashMap[num] = struct{}{}	
+		} else {
+			res = num
+			break
+		}	
+	}
+	return res
 }
 ```
 
@@ -71,15 +71,18 @@ Golang:
 
 ```go
 func findRepeatNumber(nums []int) int {
-    for i := 0; i < len(nums); i++ {
-        if nums[i] !=i {
-            if nums[nums[i]] == nums[i] {
-                return nums[i]
-            }
-           nums[i] , nums[nums[i]] = nums[nums[i]] , nums[i]
-        }
-    }
-    return -1
+	for i := 0; i < len(nums); {
+        // 注意：在替换完一轮后不能马上i++， 因为同样要还保证替换后该位置的元素也是在正确的位置上
+		if i == nums[i] {
+			i++
+			continue
+		}
+		if nums[i] == nums[nums[i]] {
+			return nums[i]
+		}
+		nums[i], nums[nums[i]] = nums[nums[i]], nums[i]
+	}
+	return -1
 }
 ```
 
