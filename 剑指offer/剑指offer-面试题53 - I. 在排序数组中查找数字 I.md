@@ -102,6 +102,25 @@ func search(nums []int, target int) int {
     }
     return count
 }
+
+func search(nums []int, target int) int {
+    N := len(nums)
+    bisearch := func(cond func(int, int) bool) int{
+        l, r := -1, N
+        for l + 1 != r {
+            m := (l + r)/2
+            if cond(m,target) {
+                 l = m 
+            } else { 
+                r = m 
+            }
+        }
+        return l
+    }
+    r := bisearch(func(m,target int) bool { return nums[m] <= target} )
+    l := bisearch(func(m,target int) bool { return nums[m] < target} )
+    return r - l 
+}
 ```
 
 > 执行用时 :8 ms, 在所有 Go 提交中击败了93.10%的用户

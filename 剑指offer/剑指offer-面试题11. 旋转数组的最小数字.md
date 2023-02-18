@@ -94,3 +94,15 @@ func minArray(numbers []int) int {
 > 执行用时 :4 ms, 在所有 Go 提交中击败了91.92%的用户
 >
 > 内存消耗 :3.1 MB, 在所有 Go 提交中击败了100.00%的用户
+
+
+
+解法二：
+
+二分法分为以下几种情况：
+
+- numbers[mid] > numbers[l]：mid左侧数组一定有序，则l=mid+1；
+- numbers[mid] < numbers[r]：mid右侧数组一定有序，则r=mid（因为最小值可能是mid）；
+- numbers[mid] == numbers[l]：如下图，旋转点可能在mid左侧也可能在右侧，无法判断，使l++；
+
+![image-20230213215548905](images/image-20230213215548905-6296550.png)
